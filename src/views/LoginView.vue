@@ -16,7 +16,7 @@
 </template>
 
 <script lang="ts">
-import { Options, Vue } from "vue-class-component";
+import { Vue } from "vue-class-component";
 
 export default class LoginView extends Vue {
   username = "";
@@ -24,10 +24,8 @@ export default class LoginView extends Vue {
 
   // Methods for handling user interactions
   login() {
-
     console.log("Logging in with username:", this.username);
     console.log("Password:", this.password);
-    
   }
 }
 </script>
