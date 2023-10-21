@@ -46,7 +46,11 @@ export default class App extends Vue {}
 }
 
 nav {
-  padding: 30px;
+  padding: 1% 1% 0.5% 1%;
+  min-width: max-content;
+  background-color: #0005;
+  height: max-content;
+
 
   a {
     font-weight: bold;
@@ -61,7 +65,6 @@ nav {
 .btn {
   padding: 0.8rem 2rem;
   display: block;
-
   border: 1px solid transparent;
   border-radius: 5px;
   text-decoration: none;
@@ -80,7 +83,6 @@ nav {
 }
 .btn-main:hover {
   color: var(--white-color);
-  background: transparent;
   border-color: var(--main-color);
 }
 </style>

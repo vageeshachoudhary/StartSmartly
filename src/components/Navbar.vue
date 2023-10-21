@@ -1,21 +1,38 @@
 <template>
   <header>
     <div class="logo">
+      <!-- Logo section -->
       <ul class="nav-ul">
+        <!-- Navigation links container -->
         <li class="nav-li">
+          <!-- Individual navigation link -->
           <router-link class="nav--link" to="/">Home</router-link>
+          <!-- Vue Router link to the Home route -->
+        </li>
+        <li class="nav-li">
+          <router-link class="nav--link" to="/">Events / Networking</router-link>
+        </li>
+        <li class="nav-li">
+          <router-link class="nav--link" to="/">Housing</router-link>
+        </li>
+        <li class="nav-li">
+          <router-link class="nav--link" to="/">Groceries Nearby</router-link>
+        </li>
+        <li class="nav-li">
+          <router-link class="nav--link" to="/">Skill Swap</router-link>
+        </li>
+        <li class="nav-li">
+          <router-link class="nav--link" to="/">Jobs</router-link>
         </li>
       </ul>
     </div>
-    <span class="menu-toggle" @click="toggleMenu">+</span>
-    <nav class="nav" v-bind:class="{ active: menuOpen }">
-      <span class="close" @click="toggleMenu">X</span>
+    <!-- Toggle menu button -->
+    <nav class="navlogin">
+      <!-- Navigation menu -->
       <ul class="nav-ul">
-        <!-- <li class="nav-li">
-          <router-link class="nav--link" to="/login">Login</router-link>
-        </li> -->
         <li class="nav-li">
-          <router-link class="btn btn-main" to="/login">Login</router-link>
+          <router-link class="btn btn-main" to="/login">Login / Sign Up</router-link>
+          <!-- Vue Router link to the Login/Sign Up route -->
         </li>
       </ul>
     </nav>
@@ -27,17 +44,19 @@ import { Vue } from "vue-class-component";
 
 export default class Navbar extends Vue {
   menuOpen = false;
+  // Variable to track the menu state (open or closed)
+
   toggleMenu() {
+    // Method to toggle the menu state
     this.menuOpen = !this.menuOpen;
   }
 }
 </script>
 
 <style scoped lang="scss">
+/* Styling for the header section and navigation links */
 header {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0.5rem 2rem;
+  margin: 0;
   display: flex;
   width: 100%;
   justify-content: space-between;
@@ -107,73 +126,14 @@ header {
 .logo {
   letter-spacing: 2px;
   font-weight: 900;
-  font-size: 1.5rem;
+  font-size: 1rem;
   font-family: "Helvetica", Roboto;
   color: var(--white-color);
   cursor: pointer;
 }
 
-.menu-toggle,
-.nav .close {
-  display: none;
-}
-
-@media (max-width: 800px) {
-  .menu-toggle {
-    color: var(--white-color);
-    background: tomato;
-    padding: 0.5rem;
-    cursor: pointer;
-    display: block;
-  }
-
-  .nav {
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    width: 100vw;
-    height: 100vh;
-    background: #000;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: all 0.6s cubic-bezier(0.86, 0, 0.07, 1);
-    transform: translate3d(-100%, 0, 0);
-  }
-
-  .nav.active {
-    transform: translateZ(0);
-  }
-
-  .nav .close {
-    color: var(--white-color);
-    position: absolute;
-    top: 2rem;
-    right: 2rem;
-    width: 40px;
-    height: 40px;
-    font-weight: 900;
-
-    background: tomato;
-
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-  }
-
-  .nav-ul {
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-
-  .nav--link:not(:first-child),
-  .btn {
-    margin-top: 2rem;
-  }
+.navlogin {
+  padding: 0;
+  float: right;
 }
 </style>

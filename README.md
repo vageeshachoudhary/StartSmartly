@@ -1,4 +1,4 @@
-# startsmartly
+# StartSmartly
 
 ## Project setup
 ```
