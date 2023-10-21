@@ -1,16 +1,31 @@
 <template>
-  <div>
+  <div id="loginform">
+    <!-- Start of the template section -->
     <h1>Login</h1>
+    <!-- Main heading for the login form -->
     <form @submit.prevent="login">
-      <div>
+      <!-- Form element with a submit event listener -->
+
+      <div id="username">
+        <!-- Container for the username input -->
         <label for="username">Username:</label>
-        <input type="text" id="username" v-model="username" />
+        <!-- Label for the username input -->
+        <input type="text" v-model="username" />
+        <!-- Input field for entering the username with two-way data binding (v-model) -->
       </div>
-      <div>
+
+      <div id="password">
+        <!-- Container for the password input -->
         <label for="password">Password:</label>
-        <input type="password" id="password" v-model="password" />
+        <!-- Label for the password input -->
+        <input type="password" v-model="password" />
+        <!-- Input field for entering the password with two-way data binding (v-model) -->
       </div>
-      <button type="submit">Login</button>
+
+      <button class="btn" type="submit">
+        <!-- Submit button for the form -->
+        Login
+      </button>
     </form>
   </div>
 </template>
@@ -22,10 +37,59 @@ export default class LoginView extends Vue {
   username = "";
   password = "";
 
-  // Methods for handling user interactions
   login() {
-    console.log("Logging in with username:", this.username);
-    console.log("Password:", this.password);
+    this.$router.push('/');
+    // Navigate to the home route when the form is submitted
+    this.reset();
+    // Call the reset method to clear the input fields
+  }
+
+  reset() {
+    // Method to reset the input fields
+    this.username = "";
+    this.password = "";
   }
 }
 </script>
+
+<style lang="scss">
+#loginform {
+  background-color: white;
+  padding: 5% 0 17% 0;
+  color: black;
+
+  h1 {
+    font-size: 60px;
+    font-weight: bold;
+    font-family: Arial, sans-serif;
+    text-transform: uppercase;
+    text-align: center;
+    margin: 4% 0 5% 0;
+  }
+
+  #username,
+  #password {
+    margin: 4% 0 0 0;
+    font-size: 30px;
+    font-weight: bold;
+  }
+
+  .btn {
+    margin: 6% 0 0 0;
+    display: inline;
+    cursor: pointer;
+  }
+
+  .btn:hover,
+  .btn:active {
+    background-color: rgba(45, 85, 24, 0.759);
+    color: white;
+  }
+
+  input {
+    margin: 0 0 0 1%;
+    min-height: 2rem;
+    min-width: 18rem;
+  }
+}
+</style>
