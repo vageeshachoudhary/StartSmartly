@@ -16,7 +16,9 @@
     "types": [
       "webpack-env",
       "mocha",
-      "chai"
+      "chai",
+      "@types/googlemaps",
+      "vue-property-decorator"
     ],
     "paths": {
       "@/*": [
@@ -34,6 +36,7 @@
     "src/**/*.ts",
     "src/**/*.tsx",
     "src/**/*.vue",
+    "src/**/*.d.ts",
     "tests/**/*.ts",
     "tests/**/*.tsx"
   ],
