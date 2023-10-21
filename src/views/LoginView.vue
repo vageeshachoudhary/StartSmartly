@@ -27,6 +27,10 @@
         Login
       </button>
     </form>
+    <!-- Sign Up message -->
+    <div id="signup">
+      Don't have an account? <router-link to="/signup">Sign Up here</router-link>
+    </div>
   </div>
 </template>
 
@@ -55,8 +59,11 @@ export default class LoginView extends Vue {
 <style lang="scss">
 #loginform {
   background-color: white;
-  padding: 5% 0 17% 0;
+  padding: 3% 0 3% 0;
   color: black;
+  max-width: 60%;
+  margin: 5% 0 5% 20%;
+
 
   h1 {
     font-size: 60px;
@@ -75,9 +82,10 @@ export default class LoginView extends Vue {
   }
 
   .btn {
-    margin: 6% 0 0 0;
+    margin: 6% 0 0 2%;
     display: inline;
     cursor: pointer;
+    font-size: 120%;
   }
 
   .btn:hover,
@@ -90,6 +98,12 @@ export default class LoginView extends Vue {
     margin: 0 0 0 1%;
     min-height: 2rem;
     min-width: 18rem;
+  }
+
+  #signup {
+    margin: 4% 0 0 2%;
+    font-size: 120%;
+    font-weight: 500;
   }
 }
 </style>
