@@ -29,12 +29,14 @@
     </form>
     <!-- Sign Up message -->
     <div id="signup">
-      Don't have an account? <router-link to="/signup">Sign Up here</router-link>
+      Don't have an account?
+      <router-link to="/signup">Sign Up here</router-link>
     </div>
   </div>
 </template>
 
 <script lang="ts">
+import axios from "axios";
 import { Vue } from "vue-class-component";
 
 export default class LoginView extends Vue {
@@ -42,10 +44,22 @@ export default class LoginView extends Vue {
   password = "";
 
   login() {
-    this.$router.push('/');
-    // Navigate to the home route when the form is submitted
-    this.reset();
-    // Call the reset method to clear the input fields
+    axios
+      .post("http://localhost:3000/getuserlogindata", {
+        userEmailId: this.username
+      })
+      .then((response) => {
+        // Handle success response
+        if(response.data[0].password === this.password) {
+          sessionStorage.setItem("userProfileID", response.data[0]._id);
+          sessionStorage.setItem("userDeatils", JSON.stringify({ firstName: response.data[0].firstName }));
+          this.$router.push("/");
+        }
+      })
+      .catch((error) => {
+        // Handle error response
+        console.error(error);
+      });
   }
 
   reset() {
@@ -63,7 +77,6 @@ export default class LoginView extends Vue {
   color: black;
   max-width: 60%;
   margin: 5% 0 5% 20%;
-
 
   h1 {
     font-size: 60px;

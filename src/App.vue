@@ -1,25 +1,17 @@
 <template>
-  <!-- Template section containing the application's layout structure -->
-  <nav>
-    <!-- Navigation bar component -->
-    <Navbar />
-  </nav>
   <!-- Router view component to display the content based on routes -->
   <router-view />
 </template>
 
 <script lang="ts">
 // Importing necessary components and modules
-import Navbar from "@/components/Navbar.vue";
-import { Options, Vue } from "vue-class-component";
+import {Options, Vue } from "vue-class-component";
 
-// Vue class with imported Navbar component
-@Options({
-  components: {
-    Navbar,
-  },
-})
-export default class App extends Vue {}
+
+
+export default class App extends Vue {
+
+}
 </script>
 
 <style lang="scss">
@@ -45,30 +37,6 @@ export default class App extends Vue {}
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #fcfdfd;
-  /* Background with linear gradient and image */
-  background: linear-gradient(
-      45deg,
-      rgba(14, 35, 36, 0.575),
-      rgba(0, 37, 22, 0.644)
-    ),
-    url("https://freeagent-res.cloudinary.com/image/upload/c_limit,w_1200/dpr_auto,f_auto/website-images/netlify/guides__small-business__stu-loans__OG.png")
-      center center;
-  background-size: cover;
-  min-height: 100vh;
-}
-
-/* Styling for the navigation bar */
-nav {
-  padding: 1% 1% 0.5% 1%;
-  min-width: max-content;
-  background-color: #0005;
-  height: max-content;
-  
-  /* Styling for navigation links */
-  a {
-    font-weight: bold;
-    color: #42b983;
-  }
 }
 
 /* Styling for buttons */
@@ -92,8 +60,8 @@ nav {
 
 /* Main button style */
 .btn-main {
-  background: var(--main-color);
-  color: #42b983;
+  background: #052727;
+  color: white;
 }
 
 /* Main button hover state */
