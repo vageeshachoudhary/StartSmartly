@@ -36,23 +36,23 @@
 </template>
 
 <script lang="ts">
-import axios from "axios";
 import { Vue } from "vue-class-component";
+import UpdatesService from "@/services/UpdatesService.vue";
 
 export default class LoginView extends Vue {
   username = "";
   password = "";
 
   login() {
-    axios
-      .post("http://localhost:3000/getuserlogindata", {
-        userEmailId: this.username
-      })
+    UpdatesService.getUserLoginData(this.username)
       .then((response) => {
         // Handle success response
-        if(response.data[0].password === this.password) {
-          sessionStorage.setItem("userProfileID", response.data[0]._id);
-          sessionStorage.setItem("userDeatils", JSON.stringify({ firstName: response.data[0].firstName }));
+        if (response[0].password === this.password) {
+          sessionStorage.setItem("userProfileID", response[0]._id);
+          sessionStorage.setItem(
+            "userDeatils",
+            JSON.stringify({ firstName: response[0].firstName })
+          );
           this.$router.push("/");
         }
       })
@@ -77,6 +77,13 @@ export default class LoginView extends Vue {
   color: black;
   max-width: 60%;
   margin: 5% 0 5% 20%;
+
+  nav {
+    padding: 1% 1% 0.5% 1%;
+    min-width: max-content;
+    background-color: rgba($color: #344749, $alpha: 01);
+    height: max-content;
+  }
 
   h1 {
     font-size: 60px;

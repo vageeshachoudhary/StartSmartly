@@ -7,14 +7,16 @@
       v-for="(profile, index) in profiles"
       :key="index"
     >
-      <img
-        :src="profile.profileImage"
-        alt="Profile Picture"
-        class="profile-picture"
-      />
-      <p><strong>Full Name:</strong> {{ profile.fullName }}</p>
-      <p><strong>Skills:</strong> {{ profile.skills }}</p>
-      <p><strong>Bio:</strong> {{ profile.bio }}</p>
+      <div v-if="index === currentIndex">
+        <img
+          :src="profile.profileImage"
+          alt="Profile Picture"
+          class="profile-picture"
+        />
+        <p><strong>Full Name:</strong> {{ profile.fullName }}</p>
+        <p><strong>Skills:</strong> {{ profile.skills }}</p>
+        <p><strong>Bio:</strong> {{ profile.bio }}</p>
+      </div>
     </div>
     <div class="controls">
       <button @click="prevProfile" :disabled="currentIndex === 0">
@@ -32,7 +34,7 @@
 
 <script lang="ts">
 import { Options, Vue } from "vue-class-component";
-import axios from "axios";
+import UpdatesService from "@/services/UpdatesService.vue";
 
 interface UserProfile {
   fullName?: string;
@@ -48,11 +50,11 @@ export default class SkillsSlideshow extends Vue {
   public currentIndex = 0;
 
   public created(): void {
-    axios
-      .get("http://localhost:3000/getuserprofiles")
+    UpdatesService.getUserProfiles()
       .then((response) => {
         // Handle success response
-        this.profiles = response.data;
+        response = response.filter((profile: UserProfile) => profile.skills);
+        this.profiles = response;
       })
       .catch((error) => {
         // Handle error response
@@ -95,7 +97,6 @@ export default class SkillsSlideshow extends Vue {
 }
 
 .slide {
-  display: none;
   transition: opacity 0.5s ease-in-out;
 }
 
