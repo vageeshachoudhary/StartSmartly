@@ -91,7 +91,7 @@
           </div>
           <div v-if="isLoggedIn">
             <router-link to="/my-profile" class="profile-button">
-              Create Profile
+              View Profile
             </router-link>
           </div>
         </div>
@@ -119,7 +119,8 @@ export default class SkillSwapView extends Vue {
   isLoggedIn = sessionStorage.getItem("userProfileID");
 
   mounted() {
-    // Trigger animation after the component is mounted
+    // Trigger animation after the component is mounted 
+    // i.e after the Vue component has been inserted into the DOM
     this.animateCoverPhoto();
     this.showText = true; // Set showText to true to trigger text animation
   }

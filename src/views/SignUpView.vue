@@ -73,8 +73,8 @@
 <script lang="ts">
 // Import necessary modules and components
 import { Vue } from "vue-class-component";
-import axios from "axios";
 import { errors } from "undici-types";
+import UpdatesService from "@/services/UpdatesService.vue";
 
 // Export the SignUpView component class
 export default class SignUpView extends Vue {
@@ -121,12 +121,12 @@ export default class SignUpView extends Vue {
         password: this.password,
       };
 
-      axios.post("http://localhost:3000/insertuserprofiledata", userDeatils)
+      UpdatesService.insertUserProfileData(userDeatils)
       .then((response) => {
         // Handle success response
-        sessionStorage.setItem("userProfileID", response.data.insertedId);
+        sessionStorage.setItem("userProfileID", response.insertedId);
         sessionStorage.setItem("userDeatils", JSON.stringify({ firstName: userDeatils.firstName }));
-        this.$router.push("/");
+        this.$router.push("/login");
       })
       .catch((error) => {
         // Handle error response

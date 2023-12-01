@@ -2,9 +2,7 @@ import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router';
 import HomeView from '../views/HomeView.vue';
 import LoginView from '../views/LoginView.vue';
 import SignUpView from '../views/SignUpView.vue';
-import ProfilePage from '../views/ProfileView.vue';
 import SkillSwapView from '../views/SkillSwapView.vue';
-import CreateProfileView from '../views/CreateProfileView.vue';
 import UserProfileView from '../views/UserProfileView.vue';
 import UserProfileEdit from '../views/UserProfileEdit.vue';
 
@@ -24,11 +22,7 @@ const routes: Array<RouteRecordRaw> = [
     name: 'SignUp',
     component: SignUpView,
   },
-  {
-    path: '/profile',
-    name: 'ProfilePage',
-    component: ProfilePage,
-  },
+
   {
     path: '/skillSwap',
     name: 'SkillSwapView',

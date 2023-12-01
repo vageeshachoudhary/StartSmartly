@@ -1,9 +1,13 @@
 <template>
+    <nav>
+    <Navbar />
+  </nav>
+  <br>
   <div class="user-profile-edit">
     <h2>Edit Your Skill Swap Profile</h2>
     <form @submit.prevent="submitProfile">
       <div class="form-group">
-        <label for="fullName">Full Name:</label>
+        <label for="fullName">Display Name:</label>
         <input
           type="text"
           id="fullName"
@@ -43,9 +47,11 @@
 </template>
 
 <script lang="ts">
-import axios from "axios";
 import { Vue, Options } from "vue-class-component";
+import Navbar from "@/components/Navbar.vue";
+import UpdatesService from "@/services/UpdatesService.vue";
 
+//expected properties that a user profile object can have
 interface UserProfile {
   fullName?: string;
   email?: string;
@@ -54,18 +60,19 @@ interface UserProfile {
   profileImage?: string;
 }
 
-@Options({})
+@Options({
+  components: {
+    Navbar,
+  },
+})
 export default class UserProfileEdit extends Vue {
   public userProfile: UserProfile = {};
 
   public created(): void {
-    axios
-      .post("http://localhost:3000/getuserprofiledata", {
-        userProfileID: sessionStorage.getItem("userProfileID"),
-      })
+    UpdatesService.getUserProfileData()
       .then((response) => {
         // Handle success response
-        this.userProfile = response.data[0];
+        this.userProfile = response[0];
       })
       .catch((error) => {
         // Handle error response
@@ -93,11 +100,7 @@ export default class UserProfileEdit extends Vue {
   }
 
   public submitProfile(): void {
-    axios
-      .post("http://localhost:3000/updateuserprofiledata", {
-        _id: sessionStorage.getItem("userProfileID"),
-        ...this.userProfile,
-      })
+    UpdatesService.updateUserProfileData(this.userProfile)
       .then((response) => {
         this.$router.push("/my-profile");
       })

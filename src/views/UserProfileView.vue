@@ -1,9 +1,18 @@
 <template>
+  <nav>
+    <Navbar />
+  </nav>
+  <br />
   <div class="user-profile-view">
     <h2>Your Skill Swap Profile</h2>
     <div v-if="userProfile" class="profile-info">
+      <img
+        :src="userProfile.profileImage"
+        alt="Profile Picture Not Available"
+        class="profile-picture"
+      />
       <p>
-        <strong>Full Name:</strong>
+        <strong>Display Name:</strong>
         {{ userProfile.fullName || "Not Available" }}
       </p>
       <p><strong>Email:</strong> {{ userProfile.email || "Not Available" }}</p>
@@ -11,15 +20,13 @@
         <strong>Skills:</strong> {{ userProfile.skills || "Not Available" }}
       </p>
       <p><strong>Bio:</strong> {{ userProfile.bio || "Not Available" }}</p>
-      <p><strong>Profile Image:</strong></p>
-      <img
-        :src="userProfile.profileImage"
-        alt="Profile Picture Not Available"
-        class="profile-picture"
-      />
     </div>
+    <br />
     <router-link :to="{ name: 'user-profile-edit' }" class="edit-link"
       >Edit Profile</router-link
+    >
+    <router-link to="/skillSwap" class="swap-link"
+      >Go to Skill Swap</router-link
     >
   </div>
 </template>
@@ -27,7 +34,7 @@
 <script lang="ts">
 import { Vue, Options } from "vue-class-component";
 import Navbar from "@/components/Navbar.vue";
-import axios from "axios";
+import UpdatesService from "@/services/UpdatesService.vue";
 
 interface UserProfile {
   fullName?: string;
@@ -46,14 +53,10 @@ export default class UserProfileView extends Vue {
   public userProfile: UserProfile | null = null;
 
   public created(): void {
-    axios
-      .post("http://localhost:3000/getuserprofiledata", {
-        userProfileID: sessionStorage.getItem("userProfileID"),
-      })
+    UpdatesService.getUserProfileData()
       .then((response) => {
         // Handle success response
-        console.log(response.data[0]);
-        this.userProfile = response.data[0];
+        this.userProfile = response[0];
       })
       .catch((error) => {
         // Handle error response
@@ -86,6 +89,19 @@ export default class UserProfileView extends Vue {
   transition: background-color 0.3s ease;
 }
 
+.swap-link{
+  display: inline-block;
+  padding: 10px 10px;
+  margin-left: 5px;
+  background-color: #3498db;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 5px;
+  font-size: 1em;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
 .profile-info {
   padding: 10px;
   border-bottom: 1px solid #ddd;
@@ -98,7 +114,7 @@ export default class UserProfileView extends Vue {
 }
 
 .profile-picture {
-  max-width: 100%;
+  max-width: 40%;
   height: auto;
   margin-top: 10px;
   border-radius: 4px;

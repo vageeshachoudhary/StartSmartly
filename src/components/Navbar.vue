@@ -37,7 +37,7 @@
           >
           <!-- Vue Router link to the Login/Sign Up route -->
           <span class="firstName" v-else>
-            <span>Hello, {{ userFirstName }}!</span>
+            <span class="greeting">Hello, {{ userFirstName }}!</span>
             <button><span class="logout" v-on:click="logout()">Logout</span></button>
           </span>
         </li>
@@ -162,9 +162,18 @@ header {
 }
 
 .logout {
- 
-  text-decoration: underline;
+  display: inline-block;
+  padding: 5px;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+  text-decoration: none;
   cursor: pointer;
-  color: black;
+  // border-radius: 2px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.greeting{
+  margin-right: 10px;
 }
 </style>
