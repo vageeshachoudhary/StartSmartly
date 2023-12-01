@@ -18,7 +18,9 @@
       "mocha",
       "chai",
       "@types/googlemaps",
-      "vue-property-decorator"
+      "vue-property-decorator",
+      "node",
+      "fs"
     ],
     "paths": {
       "@/*": [
@@ -30,7 +32,8 @@
       "dom",
       "dom.iterable",
       "scripthost"
-    ]
+    ],
+    "resolveJsonModule": true
   },
   "include": [
     "src/**/*.ts",

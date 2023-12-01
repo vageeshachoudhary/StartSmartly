@@ -1,66 +1,54 @@
 <template>
   <div class="home">
-    <!-- Page Title -->
-    <h1>Welcome to StartSmartly</h1>
-    <h2>Elevating your FreshStart</h2>
-    <div id="search">
-      <span>
-        <!-- Input for search criteria -->
-        <input type="text" id="searchfield" placeholder="Enter your search criteria here" v-model="searchcriteria" />
-      </span>
-      <span>
-        <!-- Input for location with dropdown -->
-        <input type="text" id="locationfield" v-model="query" @input="searchLocation" placeholder="Enter a location" />
-        <!-- Predictions dropdown -->
-        <ul v-if="predictions.length > 0" class="predictions">
-          <li v-for="(prediction, index) in predictions" :key="index" @click="selectLocation(prediction)">{{
-            prediction.description }}</li>
-        </ul>
-      </span>
+    <nav>
+      <!-- Navigation bar component -->
+      <Navbar />
+    </nav>
+    <div id="title">
+      <!-- Page Title -->
+      <h1>Welcome to StartSmartly</h1>
+      <h2>Elevating your FreshStart</h2>
     </div>
   </div>
+  <AboutTile></AboutTile>
+  <LatestNewsTile></LatestNewsTile>
+  <GuidelinesTile></GuidelinesTile>
+  <!-- <router-link to="/profile">Profile Page</router-link> -->
 </template>
 
 <script lang="ts">
-import { Vue } from "vue-class-component";
-declare const google: any;
+import AboutTile from "@/components/AboutTile.vue";
+import GuidelinesTile from "@/components/GuidelinesTile.vue";
+import LatestNewsTile from "@/components/LatestNewsTile.vue";
+import Navbar from "@/components/Navbar.vue";
+import { Options, Vue } from "vue-class-component";
 
-export default class HomeView extends Vue {
-  // Data properties
-  searchcriteria = '';
-  query = '';
-  predictions: any = [];
 
-  // Function to search for location predictions
-  searchLocation() {
-    if (this.query) {
-      const placesService = new google.maps.places.AutocompleteService();
-      placesService.getPlacePredictions(
-        { input: this.query, types: ['(cities)'], componentRestrictions: { country: 'CA' } },
-        (results: any, status: string) => {
-          if (status === 'OK' && results) {
-            this.predictions = results;
-          }
-        }
-      );
-    } else {
-      this.predictions = [];
-    }
-  }
-
-  // Function to select a location prediction
-  selectLocation(prediction: any) {
-    this.query = prediction.description;
-    this.predictions = [];
-  }
-}
+@Options({
+  components: {
+    Navbar,
+    LatestNewsTile,
+    AboutTile,
+    GuidelinesTile,
+  },
+})
+export default class HomeView extends Vue {}
 </script>
 
 <style scoped lang="scss">
 .home {
   // Global styles for the home section
-  padding: 12% 0 0 0;
-  font-size: 250%;
+
+  /* Background with linear gradient and image */
+  background: linear-gradient(
+      45deg,
+      rgba(14, 35, 36, 0.575),
+      rgba(0, 37, 22, 0.644)
+    ),
+    url("https://freeagent-res.cloudinary.com/image/upload/c_limit,w_1200/dpr_auto,f_auto/website-images/netlify/guides__small-business__stu-loans__OG.png")
+      center center;
+  background-size: cover;
+  min-height: 100vh;
 
   h2 {
     // Styles for the subheading
@@ -69,83 +57,22 @@ export default class HomeView extends Vue {
     font-size: 100%;
   }
 
-  #search {
-    // Styles for the search container
-    width: 80%;
-    padding: 3% 3% 3% 25%;
+  #title {
+    font-size: 250%;
+    padding: 12% 0 0 0;
   }
 
-  #searchfield {
-    // Styles for the search input
-    padding-left: 3%;
-    width: 50%;
-    min-height: 2rem;
-    border-radius: 1rem;
-    background-color: #0005;
-    color: white;
-    opacity: 1;
+  /* Styling for the navigation bar */
+  nav {
+    padding: 1% 1% 0.5% 1%;
+    min-width: max-content;
+    background-color: rgba($color: #344749, $alpha: 01);
+    height: max-content;
 
-    &::placeholder {
-      // Styles for the input placeholder
-      color: white;
-    }
-  }
-
-  #locationfield {
-    // Styles for the location input
-    margin-left: 3%;
-    padding-left: 3%;
-    width: 37%;
-    min-height: 2rem;
-    border-radius: 1rem;
-    background-color: #0005;
-    color: white;
-    opacity: 1;
-
-    &::placeholder {
-      // Styles for the input placeholder
-      color: white;
-    }
-  }
-
-  .predictions {
-    // Styles for the predictions dropdown
-    position: absolute;
-    width: 18.5%;
-    margin: 0 20% 0 55.5%;
-    background-color: #fff;
-    /* Background color for the dropdown */
-    border: 1px solid #ccc;
-    border-radius: 0 0 5% 5%;
-    /* Rounded bottom corners */
-    margin-top: 5px;
-    /* Adjust as needed to control spacing */
-    max-height: 200px;
-    /* Adjust as needed for maximum height */
-    overflow-y: auto;
-    list-style: none;
-    padding: 0;
-    left: 0;
-    display: block;
-    z-index: 1;
-    text-align: left;
-    color: black;
-    font-size: small;
-
-    li {
-      // Styles for individual prediction items
-      padding: 10px;
-      cursor: pointer;
-      border-bottom: 1px solid #ccc;
-
-      &:last-child {
-        border-bottom: none;
-      }
-
-      &:hover {
-        background-color: #f0f0f0;
-        /* Highlight on hover */
-      }
+    /* Styling for navigation links */
+    a {
+      font-weight: bold;
+      color: #42b983;
     }
   }
 }

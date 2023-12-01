@@ -10,19 +10,20 @@
           <!-- Vue Router link to the Home route -->
         </li>
         <li class="nav-li">
-          <router-link class="nav--link" to="/">Events / Networking</router-link>
+          <router-link class="nav--link" to="/housing">Housing</router-link>
         </li>
         <li class="nav-li">
-          <router-link class="nav--link" to="/">Housing</router-link>
+          <router-link class="nav--link" to="/groceriesNearby"
+            >Groceries Nearby</router-link
+          >
         </li>
         <li class="nav-li">
-          <router-link class="nav--link" to="/">Groceries Nearby</router-link>
+          <router-link class="nav--link" to="/skillSwap"
+            >Skill Swap</router-link
+          >
         </li>
         <li class="nav-li">
-          <router-link class="nav--link" to="/">Skill Swap</router-link>
-        </li>
-        <li class="nav-li">
-          <router-link class="nav--link" to="/">Jobs</router-link>
+          <router-link class="nav--link" to="/jobs">Jobs</router-link>
         </li>
       </ul>
     </div>
@@ -31,8 +32,14 @@
       <!-- Navigation menu -->
       <ul class="nav-ul">
         <li class="nav-li">
-          <router-link class="btn btn-main" to="/login">Login / Sign Up</router-link>
+          <router-link v-if="!userFirstName" class="btn btn-main" to="/login"
+            >Login / Sign Up</router-link
+          >
           <!-- Vue Router link to the Login/Sign Up route -->
+          <span class="firstName" v-else>
+            <span>Hello, {{ userFirstName }}!</span>
+            <button><span class="logout" v-on:click="logout()">Logout</span></button>
+          </span>
         </li>
       </ul>
     </nav>
@@ -43,12 +50,21 @@
 import { Vue } from "vue-class-component";
 
 export default class Navbar extends Vue {
-  menuOpen = false;
-  // Variable to track the menu state (open or closed)
 
-  toggleMenu() {
-    // Method to toggle the menu state
-    this.menuOpen = !this.menuOpen;
+  userFirstName = null;
+
+  mounted(): void {
+    const userDeatils = sessionStorage.getItem("userDeatils");
+    this.userFirstName = userDeatils ? JSON.parse(userDeatils).firstName : null;
+  }
+
+
+  logout() {
+    // Method to logout the user
+    sessionStorage.removeItem("userDeatils");
+    sessionStorage.removeItem("userProfileID");
+    this.userFirstName = null;
+    this.$router.push("/");
   }
 }
 </script>
@@ -61,6 +77,7 @@ header {
   width: 100%;
   justify-content: space-between;
   align-items: center;
+  background-color: rgba($color: #344749, $alpha: 0.8);
 }
 
 .nav-ul {
@@ -70,12 +87,12 @@ header {
 }
 
 .nav-li:not(:last-child) {
-  margin-right: 1rem;
+  margin-right: 2rem;
 }
 
 .nav--link {
   display: block;
-  padding: 1rem 2rem;
+  padding: 1rem 3rem;
 
   text-decoration: none;
 
@@ -135,5 +152,19 @@ header {
 .navlogin {
   padding: 0;
   float: right;
+}
+
+.firstName {
+  color: var(--white-color);
+  font-weight: 900;
+  font-size: 1rem;
+  font-family: "Helvetica", Roboto;
+}
+
+.logout {
+ 
+  text-decoration: underline;
+  cursor: pointer;
+  color: black;
 }
 </style>
