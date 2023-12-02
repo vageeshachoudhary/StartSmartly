@@ -9,26 +9,19 @@ npm install
 ```
 npm run serve
 ```
-
-### Compiles and minifies for production
+### DB connection
 ```
-npm run build
-```
-
-### Run your unit tests
-```
-npm run test:unit
+cd api/
 ```
 
-### Run your end-to-end tests
 ```
-npm run test:e2e
-```
-
-### Lints and fixes files
-```
-npm run lint
+npm i
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+```
+npm run start
+
+```
+### CORS Policy Error (Run this command)
+
+/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --disable-web-security --user-data-dir="/Users/{username : Your device username}/ChromeDevSession"
