@@ -16,6 +16,7 @@
         <p><strong>Full Name:</strong> {{ profile.fullName }}</p>
         <p><strong>Skills:</strong> {{ profile.skills }}</p>
         <p><strong>Bio:</strong> {{ profile.bio }}</p>
+        <button>Connect</button>
       </div>
     </div>
     <div class="controls">
