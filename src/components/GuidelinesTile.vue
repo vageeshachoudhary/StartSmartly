@@ -5,7 +5,7 @@
         <h1 class="serviceTitle">Our Services: Your Comprehensive Guide to a Seamless Transition</h1>
         <div class="services-list">
           <div class="services">
-            <img src="../img/resumeWork.avif">
+            <img src="https://raw.githubusercontent.com/vageeshachoudhary/images/main/resumeWork.avif">
             <div class="layer">
               <h3>After-visa procedures</h3>
               <p>
@@ -15,7 +15,7 @@
             </div>
           </div>
           <div class="services">
-            <img src="../img/guidelines-header.jpg">
+            <img src="https://raw.githubusercontent.com/vageeshachoudhary/images/main/guidelines-header.jpg">
             <div class="layer">
               <h3>Study permits</h3>
               <p>
@@ -25,7 +25,7 @@
             </div>
           </div>
           <div class="services">
-            <img src="../img/laptop.webp">
+            <img src="https://raw.githubusercontent.com/vageeshachoudhary/images/main/laptop.webp">
             <div class="layer">
               <h3>Work permits</h3>
               <p>

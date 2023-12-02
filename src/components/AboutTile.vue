@@ -34,7 +34,7 @@ export default class AboutTile extends Vue {}
 <style lang="scss">
 
 .our_story {
-	background: url(../img/background2.jpg);
+	background: url(https://raw.githubusercontent.com/vageeshachoudhary/images/main/background2.jpg);
 	padding: 80px 100px 80px 100px;
 }
 
